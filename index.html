@@ -2,7 +2,9 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="description" content="A Wconnect desenvolve produtos digitais, software sob medida e soluções com inteligência artificial para empresas.">
+<meta name="theme-color" content="#060b14">
 <title>Wconnect — Inteligência Artificial e Software sob Medida</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -39,6 +41,13 @@ body{
 }
 ::selection{background:var(--blue);color:#fff;}
 img{max-width:100%;display:block;}
+button,a,input,textarea,summary{ -webkit-tap-highlight-color:transparent; }
+a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,summary:focus-visible{outline:2px solid var(--green-bright);outline-offset:4px;}
+.skip-link{position:fixed;left:16px;top:12px;z-index:2000;padding:10px 14px;background:var(--ice);color:var(--void);border-radius:8px;transform:translateY(-160%);transition:transform .2s;font-weight:600;text-decoration:none;}
+.skip-link:focus{transform:translateY(0);}
+body.menu-open{overflow:hidden;}
+#mobileMenu[aria-hidden="true"]{visibility:hidden;}
+#mobileMenu[aria-hidden="false"]{visibility:visible;}
 
 /* ---------- utility ---------- */
 .wrap{max-width:var(--maxw);margin:0 auto;padding:0 40px;}
@@ -342,6 +351,22 @@ details .legal-body{padding:0 0 26px;font-size:13.5px;color:var(--mist);line-hei
 }
 @media (max-width: 760px){
   html,body{width:100%;max-width:100%;overflow-x:hidden;}
+  .nav{padding-top:max(16px, env(safe-area-inset-top));}
+  .nav.scrolled{padding-top:max(10px, env(safe-area-inset-top));}
+  .nav .wrap{gap:12px;}
+  .nav-right{gap:10px;}
+  .nav-right .btn{padding:10px 15px !important;font-size:12px !important;white-space:nowrap;}
+  .hero-copy{padding-top:8px;}
+  .hero-cta-row{align-items:stretch;}
+  .hero-cta-row .btn{justify-content:center;min-height:50px;}
+  .orb-stage{min-height:280px;}
+  .orb-caption{width:100%;bottom:-4px;font-size:10px;}
+  .form-foot{align-items:stretch;}
+  .form-foot .btn{width:100%;justify-content:center;}
+  .foot-bottom{padding-bottom:max(24px, env(safe-area-inset-bottom));}
+  .social-row{width:100%;justify-content:flex-start;}
+  .legal-body{overflow-wrap:anywhere;}
+
   .wrap{width:100%;max-width:100%;padding-left:18px;padding-right:18px;}
   .nav .wrap{padding-left:18px;padding-right:18px;}
   .hero{min-height:auto;padding-top:118px;padding-bottom:78px;}
@@ -382,9 +407,10 @@ details .legal-body{padding:0 0 26px;font-size:13.5px;color:var(--mist);line-hei
 </style>
 </head>
 <body>
+<a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
 
 <!-- ============ NAV ============ -->
-<nav class="nav" id="mainNav">
+<nav class="nav" id="mainNav" aria-label="Navegação principal">
   <div class="wrap">
       <a href="#inicio" class="brand">
       <img class="brand-logo" src="assets/wconnect-logo-oficial.png" width="314" height="86" alt="WConnect">
@@ -400,13 +426,13 @@ details .legal-body{padding:0 0 26px;font-size:13.5px;color:var(--mist);line-hei
     <div class="nav-right">
       <span class="lang">PT</span>
       <a class="btn btn-primary" href="https://wa.me/551150286511" target="_blank" rel="noopener" style="padding:11px 22px;font-size:13px;">Fale Conosco</a>
-      <button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
+      <button class="burger" id="burger" type="button" aria-label="Abrir menu" aria-controls="mobileMenu" aria-expanded="false"><span></span><span></span><span></span></button>
     </div>
   </div>
 </nav>
 
 <!-- mobile menu -->
-<div id="mobileMenu" style="position:fixed;inset:0;background:rgba(6,11,20,.97);backdrop-filter:blur(16px);z-index:1200;display:none;flex-direction:column;align-items:center;justify-content:center;gap:30px;">
+<div id="mobileMenu" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Menu móvel" style="position:fixed;inset:0;background:rgba(6,11,20,.97);backdrop-filter:blur(16px);z-index:1200;display:none;flex-direction:column;align-items:center;justify-content:center;gap:30px;">
   <a href="#inicio" class="mnav" style="color:#e9f0f8;font-family:'Fraunces';font-size:26px;text-decoration:none;">Início</a>
   <a href="#solucoes" class="mnav" style="color:#e9f0f8;font-family:'Fraunces';font-size:26px;text-decoration:none;">Soluções</a>
   <a href="#software" class="mnav" style="color:#e9f0f8;font-family:'Fraunces';font-size:26px;text-decoration:none;">Software Personalizado</a>
@@ -414,10 +440,11 @@ details .legal-body{padding:0 0 26px;font-size:13.5px;color:var(--mist);line-hei
   <a href="#blog" class="mnav" style="color:#e9f0f8;font-family:'Fraunces';font-size:26px;text-decoration:none;">Blog</a>
   <a href="#contato" class="mnav" style="color:#e9f0f8;font-family:'Fraunces';font-size:26px;text-decoration:none;">Contato</a>
   <a href="https://wa.me/551150286511" target="_blank" class="btn btn-primary" style="margin-top:10px;">Fale Conosco</a>
-  <button id="closeMobile" style="position:absolute;top:28px;right:28px;background:none;border:none;color:#e9f0f8;font-size:30px;cursor:pointer;font-family:'Fraunces';">×</button>
+  <button id="closeMobile" type="button" aria-label="Fechar menu" style="position:absolute;top:28px;right:28px;background:none;border:none;color:#e9f0f8;font-size:30px;cursor:pointer;font-family:'Fraunces';">×</button>
 </div>
 
 <!-- ============ HERO ============ -->
+<main id="conteudo">
 <section class="hero" id="inicio">
   <div class="hero-bg">
     <div class="glow glow-1"></div>
@@ -879,7 +906,7 @@ details .legal-body{padding:0 0 26px;font-size:13.5px;color:var(--mist);line-hei
   </div>
 </section>
 
-<!-- ============ CONTATO ============ -->
+<!-- ============ NAV ============ -->
 <section class="section" id="contato">
   <div class="wrap">
     <div class="section-head reveal">
@@ -901,14 +928,14 @@ details .legal-body{padding:0 0 26px;font-size:13.5px;color:var(--mist);line-hei
 
       <form class="form" id="contactForm">
         <div class="form-row">
-          <div class="field"><label for="fname">Nome</label><input id="fname" type="text" required placeholder="Seu nome completo"></div>
-          <div class="field"><label for="femail">E-mail</label><input id="femail" type="email" required placeholder="voce@empresa.com"></div>
+          <div class="field"><label for="fname">Nome</label><input id="fname" name="name" type="text" autocomplete="name" required placeholder="Seu nome completo"></div>
+          <div class="field"><label for="femail">E-mail</label><input id="femail" name="email" type="email" autocomplete="email" required placeholder="voce@empresa.com"></div>
         </div>
         <div class="form-row">
-          <div class="field"><label for="fphone">Telefone</label><input id="fphone" type="tel" placeholder="+55 (11) 00000-0000"></div>
-          <div class="field"><label for="fcompany">Empresa</label><input id="fcompany" type="text" placeholder="Nome da empresa"></div>
+          <div class="field"><label for="fphone">Telefone</label><input id="fphone" name="phone" type="tel" autocomplete="tel" placeholder="+55 (11) 00000-0000"></div>
+          <div class="field"><label for="fcompany">Empresa</label><input id="fcompany" name="company" type="text" autocomplete="organization" placeholder="Nome da empresa"></div>
         </div>
-        <div class="field"><label for="fmsg">Mensagem</label><textarea id="fmsg" required placeholder="Conte um pouco sobre o seu projeto..."></textarea></div>
+        <div class="field"><label for="fmsg">Mensagem</label><textarea id="fmsg" name="message" required placeholder="Conte um pouco sobre o seu projeto..."></textarea></div>
         <div class="form-foot">
           <small>Ao enviar, abriremos seu app de e-mail com a mensagem pronta para contato@wconnect.com.br.</small>
           <button type="submit" class="btn btn-primary">Enviar Mensagem</button>
@@ -917,6 +944,8 @@ details .legal-body{padding:0 0 26px;font-size:13.5px;color:var(--mist);line-hei
     </div>
   </div>
 </section>
+
+</main>
 
 <!-- ============ FOOTER ============ -->
 <footer id="material">
@@ -1007,16 +1036,29 @@ details .legal-body{padding:0 0 26px;font-size:13.5px;color:var(--mist);line-hei
   var nav = document.getElementById('mainNav');
   window.addEventListener('scroll', function(){
     if(window.scrollY > 40){ nav.classList.add('scrolled'); } else { nav.classList.remove('scrolled'); }
-  });
+  }, {passive:true});
 
   // mobile menu
   var burger = document.getElementById('burger');
   var mobileMenu = document.getElementById('mobileMenu');
   var closeMobile = document.getElementById('closeMobile');
-  burger.addEventListener('click', function(){ mobileMenu.style.display = 'flex'; });
-  closeMobile.addEventListener('click', function(){ mobileMenu.style.display = 'none'; });
+  function setMobileMenu(open){
+    mobileMenu.style.display = open ? 'flex' : 'none';
+    mobileMenu.setAttribute('aria-hidden', String(!open));
+    burger.setAttribute('aria-expanded', String(open));
+    burger.setAttribute('aria-label', open ? 'Fechar menu' : 'Abrir menu');
+    document.body.classList.toggle('menu-open', open);
+    if(open){ closeMobile.focus(); }
+  }
+  burger.addEventListener('click', function(){ setMobileMenu(true); });
+  closeMobile.addEventListener('click', function(){ setMobileMenu(false); burger.focus(); });
   document.querySelectorAll('.mnav').forEach(function(a){
-    a.addEventListener('click', function(){ mobileMenu.style.display = 'none'; });
+    a.addEventListener('click', function(){ setMobileMenu(false); });
+  });
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'Escape' && mobileMenu.getAttribute('aria-hidden') === 'false'){
+      setMobileMenu(false); burger.focus();
+    }
   });
 
   // contact form -> mailto
